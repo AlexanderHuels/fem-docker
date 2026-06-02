@@ -18,6 +18,46 @@ This repository currently provides a first working CalculiX core image based on 
 ```text
 calculix-core:ubuntu24.04
 ```
+## Docker Hub
+
+The image is available on Docker Hub:
+
+```text
+ale10tech/calculix-core:ubuntu24.04
+ale10tech/calculix-core:ccx2.21-ubuntu24.04
+ale10tech/calculix-core:0.1.0
+```
+
+Pull the image:
+
+```bash
+docker pull ale10tech/calculix-core:ubuntu24.04
+```
+
+Run a CalculiX job from the current working directory:
+
+```bash
+docker run --rm -it \
+  --user "$(id -u):$(id -g)" \
+  -v "$PWD:/work" \
+  -w /work \
+  ale10tech/calculix-core:ubuntu24.04 \
+  ccx cantilever
+```
+
+Important: call `ccx` without the `.inp` extension.
+
+Correct:
+
+```bash
+ccx cantilever
+```
+
+Wrong:
+
+```bash
+ccx cantilever.inp
+```
 
 ## Included Tools
 
@@ -151,4 +191,3 @@ Additional images may be added later for:
 * FEM + ML / AI workflows
 * Debian slim or Alpine experiments
 * Ubuntu 26.04 with CalculiX built from source
-
