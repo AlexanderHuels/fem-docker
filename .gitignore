@@ -1,0 +1,34 @@
+# CalculiX result and temporary files
+*.12d
+*.cvg
+*.dat
+*.frd
+*.sta
+spooles.out
+*.out
+*.eig
+*.nam
+*.rin
+
+# Core dumps / crash files
+core
+core.*
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local Dockerfile backups / experiments
+Dockerfile.bak*
+Dockerfile.*_broken
+Dockerfile.ubuntu26.04_apt_ccx_broken
+
+# Logs
+*.log
