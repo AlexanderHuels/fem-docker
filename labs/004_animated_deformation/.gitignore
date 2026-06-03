@@ -1,0 +1,13 @@
+# Generated CalculiX input and result files
+input/*.inp
+
+results/*
+!results/.gitkeep
+!results/*.txt
+!results/*.csv
+!results/*.md
+
+# Generated intermediate animation frames
+frames/*.png
+
+# Final animation files are tracked intentionally

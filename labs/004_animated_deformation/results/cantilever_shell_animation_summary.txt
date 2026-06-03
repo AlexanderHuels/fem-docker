@@ -1,0 +1,23 @@
+Lab 004 — Animated Cantilever Deformation
+=========================================
+
+Model:
+- Cantilever shell benchmark
+- Beam length: 1000 mm
+- Beam height: 100 mm
+- Shell thickness: 20 mm
+- Material: Aluminium
+- Young's modulus: 71000 MPa
+- Poisson's ratio: 0.3
+- Total vertical load: 1000 N
+
+Static reference:
+- Analytical tip displacement:      2.8169 mm
+- CalculiX mean abs(U3) load nodes: 2.8304 mm
+- Relative error:                   0.479 %
+
+Animation:
+- Output GIF: figures/cantilever_shell_animation_linkedin.gif
+- Deformation scale factor: x30
+- Frames: 24
+- Frame duration: 90 ms
