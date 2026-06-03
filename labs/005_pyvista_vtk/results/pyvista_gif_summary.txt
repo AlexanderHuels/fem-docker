@@ -1,0 +1,13 @@
+Lab 005 — PyVista GIF Animation
+================================
+
+Input mesh: /repo/labs/004_animated_deformation/results/cantilever_shell_animation.inp
+Input displacements: /repo/labs/004_animated_deformation/results/cantilever_shell_animation.dat
+Nodes: 246
+Shell elements: 200
+Max displacement magnitude: 2.837835 mm
+Max deformation scale: 30.0
+Frames: 22
+Approx. frame duration: 90 ms
+
+Written: /repo/labs/005_pyvista_vtk/figures/cantilever_pyvista_overlay_animation.gif
