@@ -2,36 +2,40 @@
 
 Docker-based FEM tooling for CalculiX workflows.
 
-This repository currently provides a first working CalculiX core image based on Ubuntu 24.04.
+This repository provides versioned Docker images for reproducible CalculiX CCX workflows based on Ubuntu 24.04.
 
-## Current Image
-
-```text
-calculix-core:ubuntu24.04# FEM Docker Images
-
-Docker-based FEM tooling for CalculiX workflows.
-
-This repository currently provides a first working CalculiX core image based on Ubuntu 24.04.
-
-## Current Image
+## Current Images
 
 ```text
-calculix-core:ubuntu24.04
+ale10tech/calculix-core:ccx2.23-ubuntu24.04
+ale10tech/calculix-core:ccx2.21-ubuntu24.04
+ale10tech/calculix-core:ubuntu24.04
 ```
 ## Docker Hub
 
-The image is available on Docker Hub:
+The images are available on Docker Hub:
 
 ```text
-ale10tech/calculix-core:ubuntu24.04
+ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
+ale10tech/calculix-core:ubuntu24.04
 ale10tech/calculix-core:0.1.0
 ```
+
+## CalculiX CCX 2.23 Source Build
+
+The `ccx2.23-ubuntu24.04` image builds CalculiX CCX 2.23 from upstream source during the Docker build.
+
+Reason:
+
+* Ubuntu 24.04 apt packages provide CalculiX CCX 2.21.
+* The upstream prebuilt CCX 2.23 Linux executable requires `libgfortran.so.4`, which is not available by default on Ubuntu 24.04.
+* Building CCX 2.23 from source inside the container links the solver against the Ubuntu 24.04 runtime libraries.
 
 Pull the image:
 
 ```bash
-docker pull ale10tech/calculix-core:ubuntu24.04
+docker pull ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ```
 
 Run a CalculiX job from the current working directory:
@@ -41,7 +45,7 @@ docker run --rm -it \
   --user "$(id -u):$(id -g)" \
   -v "$PWD:/work" \
   -w /work \
-  ale10tech/calculix-core:ubuntu24.04 \
+  ale10tech/calculix-core:ccx2.23-ubuntu24.04 \
   ccx cantilever
 ```
 
@@ -61,11 +65,10 @@ ccx cantilever.inp
 
 ## Included Tools
 
-The current image includes:
+The core images include:
 
 * Ubuntu 24.04
-* CalculiX CCX 2.21
-* CalculiX CGX 2.21
+* CalculiX CCX
 * Python 3.12
 * NumPy
 * SciPy
@@ -75,6 +78,11 @@ The current image includes:
 * PyVista
 * JupyterLab
 * Gmsh
+
+Version-specific notes:
+
+* `ccx2.21-ubuntu24.04` uses Ubuntu package versions of CCX and CGX.
+* `ccx2.23-ubuntu24.04` builds CCX 2.23 from upstream source and currently focuses on the CCX solver.
 
 ## Why Ubuntu 24.04?
 

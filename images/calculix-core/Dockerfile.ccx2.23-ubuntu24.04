@@ -1,0 +1,90 @@
+FROM ubuntu:24.04
+
+LABEL maintainer="Alex"
+LABEL org.opencontainers.image.title="calculix-core"
+LABEL org.opencontainers.image.description="Ubuntu 24.04 based CalculiX CCX 2.23 FEM container with Python tooling"
+LABEL org.opencontainers.image.version="ccx2.23-ubuntu24.04"
+LABEL org.opencontainers.image.licenses="GPL-2.0-or-later and package-specific licenses"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV CCX_VERSION=2.23
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    curl \
+    git \
+    bzip2 \
+    tar \
+    build-essential \
+    gfortran \
+    make \
+    cmake \
+    python3 \
+    python3-pip \
+    python3-venv \
+    python3-dev \
+    libopenblas-dev \
+    liblapack-dev \
+    libarpack2-dev \
+    libspooles-dev \
+    libgl1 \
+    libglu1-mesa \
+    libxi6 \
+    libxmu6 \
+    libxext6 \
+    libx11-6 \
+    gmsh \
+    && rm -rf /var/lib/apt/lists/*
+
+# Build CalculiX CCX 2.23 from upstream source instead of using Ubuntu apt packages.
+# Reason:
+# - Ubuntu 24.04 apt currently provides an older calculix-ccx package.
+# - The upstream prebuilt Linux binary requires libgfortran.so.4, which is not
+#   available by default on Ubuntu 24.04.
+# - Building from source links CCX against the Ubuntu 24.04 runtime libraries.
+#
+# Makefile adjustments:
+# - use Ubuntu system SPOOLES/ARPACK headers and libraries
+# - add -fcommon for modern GCC compatibility
+# - add -fallow-argument-mismatch for modern gfortran compatibility
+# - remove the original local SPOOLES archive dependency from the ccx target
+# - link against system libraries: spooles, arpack, lapack, blas, math
+
+RUN mkdir -p /opt/calculix /tmp/calculix-build && \
+    wget -O /tmp/calculix-build/ccx_${CCX_VERSION}.src.tar.bz2 \
+        https://www.dhondt.de/ccx_${CCX_VERSION}.src.tar.bz2 && \
+    tar -xjf /tmp/calculix-build/ccx_${CCX_VERSION}.src.tar.bz2 \
+        -C /tmp/calculix-build && \
+    cd /tmp/calculix-build/CalculiX/ccx_${CCX_VERSION}/src && \
+    sed -i \
+        -e 's|-I ../../../SPOOLES.2.2|-I/usr/include/spooles|g' \
+        -e 's|-I ../../../ARPACK|-I/usr/include/arpack|g' \
+        -e 's|CFLAGS =|CFLAGS = -fcommon |' \
+        -e 's|FFLAGS =|FFLAGS = -fallow-argument-mismatch |' \
+        Makefile && \
+    sed -i 's|^ccx_2\.23:.*|ccx_2.23: $(OCCXMAIN) ccx_2.23.a|' Makefile && \
+    printf '\nLIBS = -lspooles -larpack -llapack -lblas -lm\n' >> Makefile && \
+    make -j"$(nproc)" && \
+    cp "ccx_${CCX_VERSION}" /usr/local/bin/ccx && \
+    chmod +x /usr/local/bin/ccx && \
+    rm -rf /tmp/calculix-build
+
+RUN python3 -m venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir \
+    numpy \
+    scipy \
+    pandas \
+    matplotlib \
+    meshio \
+    pyvista \
+    jupyterlab \
+    ipykernel
+
+WORKDIR /work
+
+CMD ["/bin/bash"]
