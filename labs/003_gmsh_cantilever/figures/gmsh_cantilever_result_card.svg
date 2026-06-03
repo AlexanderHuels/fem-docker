@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<rect width="1200" height="675" fill="#ffffff"/>
+<text x="70" y="85" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="bold" text-anchor="start" fill="#111111">CalculiX 2.23 Docker FEM Lab</text>
+<text x="70" y="125" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="normal" text-anchor="start" fill="#111111">Lab 003 — Gmsh generated cantilever shell workflow</text>
+<rect x="70" y="165" width="1060" height="175" rx="18" fill="#f7f7f7" stroke="#d0d0d0"/>
+<text x="105" y="215" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="start" fill="#111111">Workflow</text>
+<rect x="75" y="250" width="150" height="50" rx="10" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+<text x="150" y="283" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#111111">Python</text>
+<line x1="235" y1="275" x2="270" y2="275" stroke="#222222" stroke-width="4"/>
+<polygon points="270,275 252,265 252,285" fill="#222222"/>
+<rect x="285" y="250" width="150" height="50" rx="10" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+<text x="360" y="283" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#111111">Gmsh CLI</text>
+<line x1="445" y1="275" x2="480" y2="275" stroke="#222222" stroke-width="4"/>
+<polygon points="480,275 462,265 462,285" fill="#222222"/>
+<rect x="495" y="250" width="150" height="50" rx="10" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+<text x="570" y="283" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#111111">MSH → INP</text>
+<line x1="655" y1="275" x2="690" y2="275" stroke="#222222" stroke-width="4"/>
+<polygon points="690,275 672,265 672,285" fill="#222222"/>
+<rect x="705" y="250" width="150" height="50" rx="10" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+<text x="780" y="283" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#111111">CCX</text>
+<line x1="865" y1="275" x2="900" y2="275" stroke="#222222" stroke-width="4"/>
+<polygon points="900,275 882,265 882,285" fill="#222222"/>
+<rect x="915" y="250" width="150" height="50" rx="10" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+<text x="990" y="283" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#111111">Postprocess</text>
+<rect x="70" y="375" width="500" height="210" rx="18" fill="#f7f7f7" stroke="#d0d0d0"/>
+<text x="105" y="425" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="start" fill="#111111">Gmsh mesh</text>
+<rect x="120" y="470" width="360" height="70" fill="none" stroke="#222222" stroke-width="3"/>
+<line x1="160.0" y1="470" x2="160.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="200.0" y1="470" x2="200.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="240.0" y1="470" x2="240.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="280.0" y1="470" x2="280.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="320.0" y1="470" x2="320.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="360.0" y1="470" x2="360.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="400.0" y1="470" x2="400.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="440.0" y1="470" x2="440.0" y2="540" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="120" y1="493.3" x2="480" y2="493.3" stroke="#bbbbbb" stroke-width="2"/>
+<line x1="120" y1="516.7" x2="480" y2="516.7" stroke="#bbbbbb" stroke-width="2"/>
+<text x="105" y="565" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#111111">246 nodes, 200 S4 shell elements</text>
+<rect x="620" y="375" width="510" height="210" rx="18" fill="#f7f7f7" stroke="#d0d0d0"/>
+<text x="655" y="425" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="start" fill="#111111">Result</text>
+<text x="655" y="475" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#111111">Analytical: 2.816901 mm</text>
+<text x="655" y="515" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#111111">CalculiX:   2.830381 mm</text>
+<text x="655" y="555" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="bold" text-anchor="start" fill="#111111">Relative error: 0.479 %</text>
+<text x="70" y="640" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#111111">Gmsh CLI runs inside the same Docker image as CalculiX — no local Gmsh installation required.</text>
+</svg>
