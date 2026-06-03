@@ -2,6 +2,8 @@
 
 This lab demonstrates a small reproducible CalculiX workflow for a cantilever shell benchmark.
 
+![Cantilever shell static result](figures/cantilever_shell_static_result_card.svg)
+
 The model is inspired by a classical cantilever beam benchmark and implemented with:
 
 - CalculiX 2.23
