@@ -1,0 +1,7 @@
+# CalculiX generated input and result files
+input/*.inp
+results/*
+!results/.gitkeep
+!results/*.csv
+!results/*.md
+!results/*.txt

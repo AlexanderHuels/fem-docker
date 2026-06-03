@@ -1,0 +1,6 @@
+case_name,nx,nz,nodes,elements,element_size_x_mm,load_nodes,load_per_node_N,analytical_tip_displacement_mm
+cantilever_shell_nx005_nz005,5,5,36,25,200.0,33 34,-500.0,2.816901408450704
+cantilever_shell_nx010_nz005,10,5,66,50,100.0,63 64,-500.0,2.816901408450704
+cantilever_shell_nx020_nz005,20,5,126,100,50.0,123 124,-500.0,2.816901408450704
+cantilever_shell_nx040_nz005,40,5,246,200,25.0,243 244,-500.0,2.816901408450704
+cantilever_shell_nx080_nz005,80,5,486,400,12.5,483 484,-500.0,2.816901408450704
