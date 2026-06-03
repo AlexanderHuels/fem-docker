@@ -1,0 +1,14 @@
+Lab 001 — Cantilever Shell Static Result
+============================================
+
+Load nodes: [243, 244]
+
+Node displacements from CalculiX .dat:
+  node 243: U1 = -0.042163 mm, U2 =  7.588603e-11 mm, U3 = -2.830381 mm, |U| =  2.830695 mm
+  node 244: U1 =  0.042163 mm, U2 =  7.492890e-11 mm, U3 = -2.830381 mm, |U| =  2.830695 mm
+
+Analytical tip displacement:      2.816901 mm
+CalculiX mean |U3| at load nodes: 2.830381 mm
+CalculiX max |U| at load nodes:   2.830695 mm
+Relative error based on |U3|:     0.479 %
+

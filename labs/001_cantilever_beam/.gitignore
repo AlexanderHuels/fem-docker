@@ -1,0 +1,4 @@
+# CalculiX result files
+results/*
+!results/.gitkeep
+!results/*_summary.txt
