@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<rect width="1200" height="675" fill="#ffffff"/>
+<text x="70" y="85" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="bold" text-anchor="start" fill="#111111">CalculiX 2.23 Docker FEM Lab</text>
+<text x="70" y="125" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="normal" text-anchor="start" fill="#111111">Lab 002 — Mesh convergence study</text>
+<rect x="70" y="160" width="780" height="445" rx="18" fill="#f7f7f7" stroke="#d0d0d0"/>
+<text x="105" y="210" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="start" fill="#111111">Tip displacement convergence</text>
+<line x1="115" y1="525" x2="805" y2="525" stroke="#222222" stroke-width="3"/>
+<line x1="115" y1="525" x2="115" y2="215" stroke="#222222" stroke-width="3"/>
+<text x="460.0" y="580" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="normal" text-anchor="middle" fill="#111111">elements along length nx</text>
+<text x="60" y="370.0" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="normal" text-anchor="middle" fill="#111111">|U3| [mm]</text>
+<line x1="115" y1="306.36425644480687" x2="805" y2="306.36425644480687" stroke="#666666" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="797" y="296.36425644480687" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#111111">analytical 2.8169 mm</text>
+<polyline points="115.0,489.3 161.0,335.2 253.0,279.2 437.0,258.2 805.0,250.7" fill="none" stroke="#111111" stroke-width="5"/>
+<circle cx="115.0" cy="489.3" r="7" fill="#111111"/>
+<text x="115.0" y="553" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#111111">5</text>
+<text x="115.0" y="475.2935302180403" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" text-anchor="middle" fill="#111111">2.7657</text>
+<circle cx="161.0" cy="335.2" r="7" fill="#111111"/>
+<text x="161.0" y="553" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#111111">10</text>
+<text x="161.0" y="321.2129718149243" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" text-anchor="middle" fill="#111111">2.8088</text>
+<circle cx="253.0" cy="279.2" r="7" fill="#111111"/>
+<text x="253.0" y="553" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#111111">20</text>
+<text x="253.0" y="265.20023266796363" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" text-anchor="middle" fill="#111111">2.8245</text>
+<circle cx="437.0" cy="258.2" r="7" fill="#111111"/>
+<text x="437.0" y="553" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#111111">40</text>
+<text x="437.0" y="244.23339361199618" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" text-anchor="middle" fill="#111111">2.8304</text>
+<circle cx="805.0" cy="250.7" r="7" fill="#111111"/>
+<text x="805.0" y="553" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#111111">80</text>
+<text x="805.0" y="236.7064697819597" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" text-anchor="middle" fill="#111111">2.8325</text>
+<rect x="880" y="160" width="250" height="445" rx="18" fill="#f7f7f7" stroke="#d0d0d0"/>
+<text x="915" y="210" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="start" fill="#111111">Key result</text>
+<text x="915" y="280" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#111111">Coarse mesh</text>
+<text x="915" y="315" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#111111">nx=5: 2.7657 mm</text>
+<text x="915" y="345" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#111111">-2.36 % vs finest</text>
+<text x="915" y="415" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#111111">Finest mesh</text>
+<text x="915" y="450" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#111111">nx=80: 2.8325 mm</text>
+<text x="915" y="520" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#111111">Observation</text>
+<text x="915" y="552" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#111111">coarse mesh</text>
+<text x="915" y="580" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#111111">is too stiff</text>
+<text x="70" y="640" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#111111">Workflow: Python mesh variants → CCX Docker runs → .dat postprocessing → convergence table</text>
+</svg>
