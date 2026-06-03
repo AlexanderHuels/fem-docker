@@ -1,0 +1,14 @@
+Lab 003 — Gmsh Cantilever Shell Static Result
+====================================================
+
+Load nodes: [45, 46]
+
+Node displacements from CalculiX .dat:
+  node 45: U1 = -0.042163 mm, U2 =  3.009477e-10 mm, U3 = -2.830381 mm, |U| =  2.830695 mm
+  node 46: U1 =  0.042163 mm, U2 =  3.002879e-10 mm, U3 = -2.830381 mm, |U| =  2.830695 mm
+
+Analytical tip displacement:       2.816901 mm
+CalculiX mean abs(U3) load nodes:  2.830381 mm
+CalculiX max abs(U) load nodes:    2.830695 mm
+Relative error based on abs(U3):   0.479 %
+

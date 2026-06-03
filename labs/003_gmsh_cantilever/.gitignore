@@ -1,0 +1,13 @@
+# Generated Gmsh and CalculiX files
+geo/*.geo
+mesh/*.msh
+input/*.inp
+
+# CalculiX result files
+results/*
+!results/.gitkeep
+!results/*.csv
+!results/*.md
+!results/*.txt
+
+# Generated figures are tracked intentionally
