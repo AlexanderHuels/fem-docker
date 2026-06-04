@@ -1,0 +1,108 @@
+FROM ubuntu:24.04
+
+LABEL maintainer="Alex"
+LABEL org.opencontainers.image.title="calculix-core"
+LABEL org.opencontainers.image.description="Ubuntu 24.04 based CalculiX CCX 2.23 FEM container with SPOOLES-MT and Python tooling"
+LABEL org.opencontainers.image.version="ccx2.23-spoolesmt-ubuntu24.04"
+LABEL org.opencontainers.image.licenses="GPL-2.0-or-later and package-specific licenses"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV CCX_VERSION=2.23
+ENV SPOOLES_VERSION=2.2
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    curl \
+    git \
+    bzip2 \
+    gzip \
+    tar \
+    build-essential \
+    gfortran \
+    make \
+    cmake \
+    python3 \
+    python3-pip \
+    python3-venv \
+    python3-dev \
+    libopenblas-dev \
+    liblapack-dev \
+    libarpack2-dev \
+    libgl1 \
+    libglu1-mesa \
+    libxi6 \
+    libxmu6 \
+    libxext6 \
+    libx11-6 \
+    gmsh \
+    && rm -rf /var/lib/apt/lists/*
+
+# Build CalculiX CCX 2.23 from upstream source.
+#
+# Difference to Dockerfile.ccx2.23-ubuntu24.04:
+# - Do NOT link against Ubuntu's libspooles.so.
+# - Build SPOOLES 2.2 from source.
+# - Build SPOOLES-MT library: SPOOLES.2.2/MT/src/spoolesMT.a.
+# - Compile CCX with -DUSE_MT=1 and -fopenmp.
+# - Link CCX statically against spoolesMT.a and spooles.a.
+#
+# Runtime thread controls commonly used with CCX/SPOOLES-MT:
+# - OMP_NUM_THREADS
+# - CCX_NPROC_EQUATION_SOLVER
+
+RUN mkdir -p /tmp/calculix-build && \
+    cd /tmp/calculix-build && \
+    wget -O spooles.${SPOOLES_VERSION}.tgz \
+        https://www.netlib.org/linalg/spooles/spooles.${SPOOLES_VERSION}.tgz && \
+    mkdir -p SPOOLES.${SPOOLES_VERSION} && \
+    tar -xzf spooles.${SPOOLES_VERSION}.tgz -C SPOOLES.${SPOOLES_VERSION} && \
+    cd SPOOLES.${SPOOLES_VERSION} && \
+    sed -i \
+        -e 's|^CC *=.*|CC = gcc|' \
+        -e 's|/usr/lang-4.0/bin/cc|gcc|g' \
+        Make.inc && \
+    make lib && \
+    cd MT/src && \
+    make && \
+    test -f spoolesMT.a && \
+    test -f ../../spooles.a
+
+RUN cd /tmp/calculix-build && \
+    wget -O ccx_${CCX_VERSION}.src.tar.bz2 \
+        https://www.dhondt.de/ccx_${CCX_VERSION}.src.tar.bz2 && \
+    tar -xjf ccx_${CCX_VERSION}.src.tar.bz2 \
+        -C /tmp/calculix-build && \
+    cd /tmp/calculix-build/CalculiX/ccx_${CCX_VERSION}/src && \
+    sed -i \
+        -e 's|-I ../../../SPOOLES.2.2|-I/tmp/calculix-build/SPOOLES.2.2|g' \
+        -e 's|-I ../../../ARPACK|-I/usr/include/arpack|g' \
+        -e 's|CFLAGS =|CFLAGS = -fcommon -fopenmp -DUSE_MT=1 |' \
+        -e 's|FFLAGS =|FFLAGS = -fallow-argument-mismatch -fopenmp |' \
+        Makefile && \
+    sed -i 's|^ccx_2\.23:.*|ccx_2.23: $(OCCXMAIN) ccx_2.23.a|' Makefile && \
+    sed -i 's|$(FC) -Wall -O3 -o|$(FC) -fopenmp -Wall -O3 -o|g' Makefile && \
+    printf '\nLIBS = /tmp/calculix-build/SPOOLES.2.2/MT/src/spoolesMT.a /tmp/calculix-build/SPOOLES.2.2/spooles.a -larpack -llapack -lblas -lgomp -lpthread -lm\n' >> Makefile && \
+    make -j2 && \
+    cp "ccx_${CCX_VERSION}" /usr/local/bin/ccx && \
+    chmod +x /usr/local/bin/ccx && \
+    rm -rf /tmp/calculix-build
+
+RUN python3 -m venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir \
+    numpy \
+    scipy \
+    pandas \
+    matplotlib \
+    meshio \
+    pyvista \
+    jupyterlab \
+    ipykernel
+
+WORKDIR /work
+
+CMD ["/bin/bash"]
