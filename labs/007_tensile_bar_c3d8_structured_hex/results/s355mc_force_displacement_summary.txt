@@ -1,0 +1,37 @@
+Lab 007 — Force-Displacement Summary
+====================================
+
+Case:
+tensile_dogbone_iso6892_form1_c3d8_s355mc
+
+Label:
+s355mc
+
+Extracted increments:
+24
+
+Final step time:
+1.000000
+
+Final mean right-end displacement:
+2.000000 mm
+
+Final summed reaction force:
+Left end RF1 sum:  -10833.285640 N
+Right end RF1 sum: 10833.285640 N
+
+Positive tensile force convention:
+From left reaction:  10833.285640 N
+From right reaction: 10833.285640 N
+
+Engineering stress estimate:
+S0 = 25.000000 mm²
+sigma_eng = 433.331426 MPa
+
+Node counts:
+Right displacement nodes: 65
+Left RF nodes:            65
+Right RF nodes:           65
+
+Files:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/results/s355mc_force_displacement_curve.csv

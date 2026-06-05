@@ -1,0 +1,15 @@
+Lab 007 — Structured Mesh Preview SVG
+=====================================
+
+Output:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/figures/structured_hex_mesh_preview.svg
+
+Preview content:
+- XY view with structured mesh lines
+- XZ view with 4 thickness layers
+
+Counts:
+- x stations: 109
+- width stations: 13
+- z stations: 5
+- expected C3D8 elements: 5184

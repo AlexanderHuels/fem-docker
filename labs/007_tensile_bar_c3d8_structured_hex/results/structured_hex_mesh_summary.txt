@@ -1,0 +1,41 @@
+Lab 007 — Structured Hex Mesh Generation
+========================================
+
+Specimen:
+- total length Lt: 215.000 mm
+- reduced width b0: 12.500 mm
+- head width B: 25.000 mm
+- thickness a0: 2.000 mm
+
+Structured mesh:
+- x stations: 109
+- width stations: 13
+- z stations: 5
+
+Generated:
+- nodes: 7085
+- C3D8 elements: 5184
+
+Expected:
+- nodes: 7085
+- C3D8 elements: 5184
+
+Node-set style counts:
+- LEFT_END nodes: 65
+- RIGHT_END nodes: 65
+- X0 plane nodes: 65
+- Y0 plane nodes: 545
+- Z0 plane nodes: 1417
+
+Bounds:
+- x: -107.500000 ... 107.500000 mm
+- y: -12.500000 ... 12.500000 mm
+- z: -1.000000 ... 1.000000 mm
+
+Orientation check:
+- first element signed corner volume indicator: 2.604166666667
+- positive orientation expected: True
+
+Output files:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/mesh/structured_hex_nodes.csv
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/mesh/structured_hex_elements.csv

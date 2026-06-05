@@ -1,0 +1,40 @@
+Lab 007 — C3D8 CalculiX Input Summary
+====================================
+
+Case:
+tensile_dogbone_iso6892_form1_c3d8_s355mc
+
+Input file:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/input/tensile_dogbone_iso6892_form1_c3d8_s355mc.inp
+
+Material include copied from:
+/home/aleks/fem-docker/labs/006_tensile_bar_elastoplastic/materials/S355MC/s355mc_ccx_material.inc
+
+Local material include:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/materials/S355MC/s355mc_ccx_material.inc
+
+Mesh:
+- nodes: 7085
+- C3D8 elements: 5184
+
+Bounds:
+- x: -107.500000 ... 107.500000 mm
+- y: -12.500000 ... 12.500000 mm
+- z: -1.000000 ... 1.000000 mm
+
+Node sets:
+- LEFT_END nodes: 65
+- RIGHT_END nodes: 65
+- FIX_YZ_NODE: 33 at (-107.5, 0.0, 0.0), distance to target 0.000000e+00 mm
+- FIX_Z_NODE: 63 at (-107.5, 12.5, 0.0), distance to target 0.000000e+00 mm
+
+Boundary/loading:
+- LEFT_END U1 = 0
+- RIGHT_END U1 = 2.000000 mm
+- FIX_YZ_NODE U2/U3 = 0
+- FIX_Z_NODE U3 = 0
+
+Output:
+- NODE FILE: U
+- EL FILE: S, E, PEEQ
+- NODE PRINT: U/RF on RIGHT_END, RF on LEFT_END
