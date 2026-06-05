@@ -1,0 +1,15 @@
+parameter,value,unit
+thickness_a0_mm,2.0,mm
+width_b0_mm,12.5,mm
+gauge_length_L0_mm,50.0,mm
+parallel_length_Lc_mm,75.0,mm
+head_width_B_mm,25.0,mm
+min_transition_radius_mm,30.0,mm
+transition_length_mm,35.0,mm
+grip_length_mm,35.0,mm
+reduced_area_S0_mm2,25.0,mm^2
+free_contour_length_mm,145.0,mm
+total_length_Lt_mm,215.0,mm
+yield_stress_MPa,250.0,MPa
+yield_force_estimate_N,6250.0,N
+estimated_transition_radius_mm,34.992277206088936,mm

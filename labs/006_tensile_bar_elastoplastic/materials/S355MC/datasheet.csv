@@ -1,0 +1,10 @@
+key,value,unit
+material_name,S355MC,-
+sheet_thickness_mm,2.0,mm
+E_MPa,210000,MPa
+nu,0.3,-
+YS_MPa,355,MPa
+UTS_LOW_MPa,430,MPa
+UTS_HIGH_MPa,550,MPa
+total_elongation_LOW_percent,19,%
+source_note,user provided engineering stress-strain curve and datasheet values,-
