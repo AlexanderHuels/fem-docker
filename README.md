@@ -11,6 +11,7 @@ ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04
 ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
+ale10tech/fem-prepost:ubuntu24.04
 ```
 
 ## Docker Hub
@@ -22,6 +23,7 @@ ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04
 ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
+ale10tech/fem-prepost:ubuntu24.04
 ale10tech/calculix-core:0.1.0
 ```
 
@@ -243,3 +245,52 @@ Additional images may be added later for:
 * FEM + ML / AI workflows
 * Debian slim or Alpine experiments
 * Ubuntu 26.04 with CalculiX built from source
+
+## FEM Pre/Post Image
+
+The `fem-prepost:ubuntu24.04` image provides a visualization and pre/postprocessing environment with:
+
+* ParaView 5.11.2
+* `pvpython`, `pvbatch`, and `pvserver`
+* PyVista and VTK
+* meshio
+* Gmsh
+* CGX
+* Xvfb-based wrappers for headless ParaView rendering
+
+Build and validation notes:
+
+* [FEM pre/post image notes](docs/images/fem-prepost-ubuntu24.04.md)
+
+Pull the image:
+
+    docker pull ale10tech/fem-prepost:ubuntu24.04
+
+Example PyVista or meshio workflow:
+
+    docker run --rm -it \
+      --user "$(id -u):$(id -g)" \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/fem-prepost:ubuntu24.04 \
+      python3 postprocess.py
+
+Example ParaView batch rendering:
+
+    docker run --rm -it \
+      --user "$(id -u):$(id -g)" \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/fem-prepost:ubuntu24.04 \
+      pvpython-xvfb render.py
+
+Example ParaView client/server workflow:
+
+    docker run --rm -it \
+      -p 11111:11111 \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/fem-prepost:ubuntu24.04 \
+      pvserver --server-port=11111
+
+Then connect a ParaView GUI client to `<VM-IP>:11111` or `localhost:11111` from inside the VM.
