@@ -1,0 +1,34 @@
+Lab 006 — PyVista von Mises history GIF
+========================================
+
+Case:
+tensile_dogbone_iso6892_form1_c3d10_s355mc_fields
+
+Input mesh:
+/repo/labs/006_tensile_bar_elastoplastic/results/tensile_dogbone_iso6892_form1_c3d10_s355mc_fields.inp
+
+Result file:
+/repo/labs/006_tensile_bar_elastoplastic/results/tensile_dogbone_iso6892_form1_c3d10_s355mc_fields.frd
+
+Parsed:
+Nodes in INP: 91455
+C3D10 elements in INP: 50921
+Rendered quadratic tetra nodes: 91455
+Displacement result blocks: 28
+Stress result blocks: 28
+Available correlated frames: 28
+Rendered frames: 28
+
+von Mises over rendered frames:
+min S_vm: 10.167210 MPa
+max S_vm: 441.593041 MPa
+p99 S_vm: 436.916382 MPa
+color max used: 441.593041 MPa
+
+Animation:
+Frame duration: 110 ms
+Deformation scale: 5.0
+Discrete color levels: 10
+
+Output:
+/repo/labs/006_tensile_bar_elastoplastic/figures/s355mc_von_mises_history_animation.gif

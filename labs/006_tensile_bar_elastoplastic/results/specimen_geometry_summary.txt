@@ -1,0 +1,27 @@
+Lab 006 — Tensile Specimen Geometry Design
+==========================================
+
+Selected specimen:
+- Flat dogbone specimen
+- EN ISO 6892-1:2019 Annex B, specimen form 1
+- Thickness a0: 2.000 mm
+- Width b0: 12.500 mm
+- Gauge length L0: 50.000 mm
+- Parallel length Lc: 75.000 mm
+
+FEM modelling choices:
+- Head width B: 25.000 mm
+- Minimum transition radius target: 30.000 mm
+- Transition length per side: 35.000 mm
+- Grip length per side: 35.000 mm
+- Total model length Lt: 215.000 mm
+
+Checks:
+- B >= 1.2 * b0: 25.000 >= 15.000 mm
+- Estimated smooth transition radius: 34.992 mm
+- Radius target fulfilled: True
+
+First-order estimate:
+- Reduced area S0: 25.000 mm²
+- Yield stress estimate: 250.000 MPa
+- Yield force estimate: 6250.000 N

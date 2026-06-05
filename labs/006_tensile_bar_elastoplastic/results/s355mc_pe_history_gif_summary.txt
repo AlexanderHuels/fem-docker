@@ -1,0 +1,35 @@
+Lab 006 — PyVista PE history GIF
+================================
+
+Case:
+tensile_dogbone_iso6892_form1_c3d10_s355mc_fields
+
+Input mesh:
+/repo/labs/006_tensile_bar_elastoplastic/results/tensile_dogbone_iso6892_form1_c3d10_s355mc_fields.inp
+
+Result file:
+/repo/labs/006_tensile_bar_elastoplastic/results/tensile_dogbone_iso6892_form1_c3d10_s355mc_fields.frd
+
+Parsed:
+Nodes in INP: 91455
+C3D10 elements in INP: 50921
+Rendered quadratic tetra nodes: 91455
+Displacement result blocks: 28
+PE result blocks: 28
+Available correlated frames: 28
+Rendered frames: 28
+
+PE over rendered frames:
+min PE: 0.00000000e+00
+max PE: 2.03876000e-02
+p95 PE: 1.33831050e-02
+p99 PE: 1.85436000e-02
+color max used: 2.03876000e-02
+
+Animation:
+Frame duration: 110 ms
+Deformation scale: 5.0
+Discrete color levels: 10
+
+Output:
+/repo/labs/006_tensile_bar_elastoplastic/figures/s355mc_pe_history_animation.gif

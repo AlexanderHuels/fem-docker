@@ -1,0 +1,45 @@
+Material conversion summary
+===========================
+
+Material:
+S355MC
+
+Input files:
+Engineering curve: labs/006_tensile_bar_elastoplastic/materials/S355MC/s355mc_engineering_curve_raw.csv
+Datasheet:         labs/006_tensile_bar_elastoplastic/materials/S355MC/datasheet.csv
+
+Datasheet values:
+E:   210000.000 MPa
+nu:  0.300000
+YS:  355.000 MPa
+UTS range: 430.000 ... 550.000 MPa
+Total elongation lower value: 19.000 %
+
+Raw engineering curve:
+All raw points: 2017
+Used points:    1425
+Post-UTS included: False
+
+Engineering UTS in raw curve:
+UTS engineering stress: 493.074 MPa
+Engineering strain at UTS: 14.610 %
+
+CalculiX plastic curve:
+Plastic points before downsampling/filtering: 1425
+Plastic points written: 80
+First plastic point:
+  true stress = 355.000000 MPa
+  plastic strain = 0.0000000000
+Last plastic point:
+  true stress = 565.112983 MPa
+  plastic strain = 0.1336756054
+
+Output files:
+labs/006_tensile_bar_elastoplastic/materials/S355MC/s355mc_engineering_true_plastic_curve.csv
+labs/006_tensile_bar_elastoplastic/materials/S355MC/s355mc_ccx_plastic_curve.csv
+labs/006_tensile_bar_elastoplastic/materials/S355MC/s355mc_ccx_material.inc
+
+Notes:
+- Engineering stress/strain is converted to true stress/true strain.
+- Plastic strain is calculated as true_strain - true_stress / E.
+- By default, the curve is trimmed at the engineering UTS to avoid using post-necking engineering data directly as homogeneous plastic material data.

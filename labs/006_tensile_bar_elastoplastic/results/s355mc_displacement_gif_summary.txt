@@ -1,0 +1,23 @@
+Lab 006 — PyVista displacement GIF
+==================================
+
+Case:
+tensile_dogbone_iso6892_form1_c3d10_s355mc_fields
+
+Frames:
+53
+
+FPS:
+12
+
+Max deformation scale:
+5.0
+
+Final max |U|:
+2.000004 mm
+
+Discrete color levels:
+8
+
+Output:
+/repo/labs/006_tensile_bar_elastoplastic/figures/s355mc_displacement_animation.gif

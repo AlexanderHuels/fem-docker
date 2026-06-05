@@ -1,0 +1,35 @@
+Lab 006 — PyVista von Mises rendering
+====================================
+
+Case:
+tensile_dogbone_iso6892_form1_c3d10_s355mc_fields
+
+Input mesh:
+/repo/labs/006_tensile_bar_elastoplastic/results/tensile_dogbone_iso6892_form1_c3d10_s355mc_fields.inp
+
+Result file:
+/repo/labs/006_tensile_bar_elastoplastic/results/tensile_dogbone_iso6892_form1_c3d10_s355mc_fields.frd
+
+Parsed:
+Nodes in INP: 91455
+C3D10 elements in INP: 50921
+Displacement nodes in FRD final block: 91455
+Stress nodes in FRD final block: 91455
+Rendered quadratic tetra nodes: 91455
+Rendered quadratic tetra cells: 50921
+Missing stress values on rendered nodes: 0
+
+von Mises stress:
+min S_vm: 168.480160 MPa
+max S_vm: 441.593041 MPa
+p99 S_vm: 440.407382 MPa
+color max used: 441.593041 MPa
+
+Deformation scale:
+5.0
+
+Discrete color levels:
+10
+
+Output:
+/repo/labs/006_tensile_bar_elastoplastic/figures/s355mc_von_mises_pyvista.png

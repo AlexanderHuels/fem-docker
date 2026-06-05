@@ -1,0 +1,31 @@
+
+*.12d
+# CalculiX result files
+*.cvg
+*.dat
+frames_*/
+*.frd
+# Generated CalculiX / Gmsh / geometry files
+# Generated figures are tracked intentionally
+# Generated Gmsh and CalculiX input files
+*.geo
+geo/*.geo
+*.inp
+input/*.inp
+# Large / temporary local archives
+mesh/*.msh
+*.msh
+*.pyc
+__pycache__/
+# Python cache
+python/__pycache__/
+results/*
+!results/*.csv
+!results/.gitkeep
+!results/*.md
+!results/*.txt
+spooles.out
+*.sta
+*.tar.gz
+# Temporary render frames
+*.zip
