@@ -1,0 +1,52 @@
+Common PyVista history GIF summary
+==================================
+
+Input INP:
+labs/007_tensile_bar_c3d8_structured_hex/results/tensile_dogbone_iso6892_form1_c3d8_s355mc.inp
+
+Input FRD:
+labs/007_tensile_bar_c3d8_structured_hex/results/tensile_dogbone_iso6892_form1_c3d8_s355mc.frd
+
+Element type:
+C3D8
+
+Field:
+pe
+
+Output:
+labs/007_tensile_bar_c3d8_structured_hex/figures/s355mc_c3d8_peeq_animation.gif
+
+Mesh:
+- nodes used: 7085
+- cells: 5184
+- points: 7085
+
+Result blocks:
+- displacement blocks: 24
+- stress blocks: 24
+- PE blocks: 24
+
+Frames:
+- available correlated frames: 24
+- rendered frames: 12
+- frame duration: 120 ms
+- frame indices: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 23]
+
+Rendered scalar over selected frames:
+- min: 0.00000000e+00
+- max: 2.09750000e-02
+- p99: 2.09359000e-02
+
+Color range:
+- color min: 0.00000000e+00
+- color max: 2.09750000e-02
+
+Display options:
+- show mesh: False
+- legend mode: discrete
+- n levels: 8
+- show undeformed: False
+- show scalar bar: True
+
+Deformation scale:
+5.0

@@ -1,0 +1,32 @@
+Lab 007 — Structured C3D8 Mesh Quality Check
+============================================
+
+Input:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/mesh/structured_hex_nodes.csv
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/mesh/structured_hex_elements.csv
+
+Counts:
+- nodes: 7085
+- C3D8 elements: 5184
+
+Orientation:
+- negative or zero orientation indicators: 0
+- near-zero orientation indicators: 0
+- min signed corner volume indicator: 9.114583333333e-01 in element 3577
+- max signed corner volume indicator: 2.604166666667e+00 in element 29
+- all strictly positive: True
+
+Edge lengths:
+- min edge length: 0.500000 mm
+- max edge length: 2.500000 mm
+
+Rough aspect ratio:
+- max edge ratio: 5.000000
+- worst aspect element: 1
+
+Assessment:
+- orientation OK: True
+- mesh size suitable for first C3D8 run: True
+
+Output:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/results/structured_hex_mesh_quality_summary.txt

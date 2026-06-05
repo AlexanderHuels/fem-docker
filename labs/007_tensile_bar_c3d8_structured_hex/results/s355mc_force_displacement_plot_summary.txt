@@ -1,0 +1,17 @@
+Force-displacement SVG plot
+===========================
+
+Input CSV:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/results/s355mc_force_displacement_curve.csv
+
+Output SVG:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/figures/s355mc_force_displacement_curve.svg
+
+Data points:
+24
+
+Final displacement:
+2.000000 mm
+
+Final tensile force:
+10833.285640 N

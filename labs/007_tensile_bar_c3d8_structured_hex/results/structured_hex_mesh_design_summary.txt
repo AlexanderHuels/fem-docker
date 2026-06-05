@@ -1,0 +1,35 @@
+Lab 007 — Structured C3D8 Mesh Design
+=====================================
+
+Specimen geometry:
+- thickness a0: 2.000 mm
+- reduced width b0: 12.500 mm
+- gauge length L0: 50.000 mm
+- parallel length Lc: 75.000 mm
+- head width B: 25.000 mm
+- transition length per side: 35.000 mm
+- grip length per side: 35.000 mm
+- total length Lt: 215.000 mm
+- reduced area S0: 25.000 mm²
+
+Structured C3D8 mesh design:
+- thickness element layers: 4
+- thickness node planes: 5
+- width element divisions: 12
+- parallel x divisions total: 40
+- transition x divisions per side: 20
+- grip x divisions per side: 14
+- total x divisions: 108
+
+Estimated mesh size:
+- C3D8 elements: 5184
+- nodes: 7085
+
+Symmetry checks:
+- x = 0 station present: True
+- y = 0 centerline present: True
+- z = 0 mid-thickness plane present: True
+- five thickness node planes: True
+
+Output:
+/home/aleks/fem-docker/labs/007_tensile_bar_c3d8_structured_hex/results/structured_hex_mesh_design.csv
