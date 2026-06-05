@@ -12,6 +12,7 @@ ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/fem-prepost:ubuntu24.04
+ale10tech/openradioss-core:ubuntu24.04
 ```
 
 ## Docker Hub
@@ -24,6 +25,7 @@ ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/fem-prepost:ubuntu24.04
+ale10tech/openradioss-core:ubuntu24.04
 ale10tech/calculix-core:0.1.0
 ```
 
@@ -294,3 +296,41 @@ Example ParaView client/server workflow:
       pvserver --server-port=11111
 
 Then connect a ParaView GUI client to `<VM-IP>:11111` or `localhost:11111` from inside the VM.
+
+## OpenRadioss Core Image
+
+The `openradioss-core:ubuntu24.04` image provides a minimal OpenRadioss solver environment with:
+
+* OpenRadioss Starter
+* OpenRadioss Engine
+* OpenRadioss MPI Engine executable
+* animation conversion via `anim_to_vtk_linux64_gf`
+* time-history conversion via `th_to_csv_linux64_gf`
+
+Build and validation notes:
+
+* [OpenRadioss core image notes](docs/images/openradioss-core-ubuntu24.04.md)
+
+Pull the image:
+
+    docker pull ale10tech/openradioss-core:ubuntu24.04
+
+Example Starter run:
+
+    docker run --rm -it \
+      --user "$(id -u):$(id -g)" \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/openradioss-core:ubuntu24.04 \
+      starter_linux64_gf -i model_0000.rad -np 1 -nt 1
+
+Example Engine run:
+
+    docker run --rm -it \
+      --user "$(id -u):$(id -g)" \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/openradioss-core:ubuntu24.04 \
+      engine_linux64_gf -i model_0001.rad -nt 1
+
+Known note: `engine_linux64_gf -help` may print help and then exit with code 139. Use `engine_linux64_gf -version` and a real Starter/Engine model run for validation.
