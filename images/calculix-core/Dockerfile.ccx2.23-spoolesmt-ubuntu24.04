@@ -1,0 +1,87 @@
+FROM ubuntu:24.04
+
+LABEL maintainer="Alex"
+LABEL org.opencontainers.image.title="calculix-core"
+LABEL org.opencontainers.image.description="Ubuntu 24.04 based CalculiX CCX 2.23 solver container with SPOOLES-MT and CGX"
+LABEL org.opencontainers.image.version="ccx2.23-spoolesmt-ubuntu24.04"
+LABEL org.opencontainers.image.licenses="GPL-2.0-or-later and package-specific licenses"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV CCX_VERSION=2.23
+ENV SPOOLES_VERSION=2.2
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    curl \
+    bzip2 \
+    gzip \
+    tar \
+    file \
+    build-essential \
+    gfortran \
+    make \
+    libopenblas-dev \
+    liblapack-dev \
+    libarpack2-dev \
+    libgomp1 \
+    calculix-cgx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Build CalculiX CCX 2.23 from upstream source with source-built SPOOLES-MT.
+#
+# Core image policy:
+# - CCX 2.23 is built from upstream source.
+# - SPOOLES 2.2 is built from Netlib source.
+# - SPOOLES-MT is linked through SPOOLES.2.2/MT/src/spoolesMT.a.
+# - CGX is installed from Ubuntu packages.
+# - No Gmsh, PyVista, VTK, ParaView, Python venv or Jupyter in this solver image.
+#
+# Runtime thread controls commonly used with CCX/SPOOLES-MT:
+# - OMP_NUM_THREADS
+# - CCX_NPROC_EQUATION_SOLVER
+
+RUN mkdir -p /tmp/calculix-build && \
+    cd /tmp/calculix-build && \
+    wget -O spooles.${SPOOLES_VERSION}.tgz \
+        https://www.netlib.org/linalg/spooles/spooles.${SPOOLES_VERSION}.tgz && \
+    mkdir -p SPOOLES.${SPOOLES_VERSION} && \
+    tar -xzf spooles.${SPOOLES_VERSION}.tgz -C SPOOLES.${SPOOLES_VERSION} && \
+    cd SPOOLES.${SPOOLES_VERSION} && \
+    sed -i \
+        -e 's|static struct timezone TZ ;|/* static struct timezone TZ disabled for modern glibc */|' \
+        -e 's|&TZ|NULL|g' \
+        timings.h && \
+    sed -i \
+        -e 's|^CC *=.*|CC = gcc|' \
+        -e 's|/usr/lang-4.0/bin/cc|gcc|g' \
+        Make.inc && \
+    make lib && \
+    cd MT/src && \
+    make && \
+    test -f spoolesMT.a && \
+    test -f ../../spooles.a
+
+RUN cd /tmp/calculix-build && \
+    wget -O ccx_${CCX_VERSION}.src.tar.bz2 \
+        https://www.dhondt.de/ccx_${CCX_VERSION}.src.tar.bz2 && \
+    tar -xjf ccx_${CCX_VERSION}.src.tar.bz2 \
+        -C /tmp/calculix-build && \
+    cd /tmp/calculix-build/CalculiX/ccx_${CCX_VERSION}/src && \
+    sed -i \
+        -e 's|-I ../../../SPOOLES.2.2|-I/tmp/calculix-build/SPOOLES.2.2|g' \
+        -e 's|-I ../../../ARPACK|-I/usr/include/arpack|g' \
+        -e 's|CFLAGS =|CFLAGS = -fcommon -fopenmp -DUSE_MT=1 |' \
+        -e 's|FFLAGS =|FFLAGS = -fallow-argument-mismatch -fopenmp |' \
+        Makefile && \
+    sed -i 's|^ccx_2\.23:.*|ccx_2.23: $(OCCXMAIN) ccx_2.23.a|' Makefile && \
+    sed -i 's|$(FC) -Wall -O3 -o|$(FC) -fopenmp -Wall -O3 -o|g' Makefile && \
+    printf '\nLIBS = /tmp/calculix-build/SPOOLES.2.2/MT/src/spoolesMT.a /tmp/calculix-build/SPOOLES.2.2/spooles.a -larpack -llapack -lblas -lgomp -lpthread -lm\n' >> Makefile && \
+    make -j2 && \
+    cp "ccx_${CCX_VERSION}" /usr/local/bin/ccx && \
+    chmod +x /usr/local/bin/ccx && \
+    rm -rf /tmp/calculix-build
+
+WORKDIR /work
+
+CMD ["/bin/bash"]
