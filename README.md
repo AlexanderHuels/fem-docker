@@ -7,20 +7,63 @@ This repository provides versioned Docker images for reproducible CalculiX CCX w
 ## Current Images
 
 ```text
+ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04
 ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ```
+
 ## Docker Hub
 
 The images are available on Docker Hub:
 
 ```text
+ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04
 ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/calculix-core:0.1.0
 ```
+
+## CalculiX CCX 2.23 SPOOLES-MT Core Image
+
+The recommended solver-core image is:
+
+```text
+ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04
+```
+
+This image provides:
+
+* Ubuntu 24.04
+* CalculiX CCX 2.23 built from upstream source
+* source-built SPOOLES-MT support
+* CGX from Ubuntu packages
+* a smaller solver-focused image without Python, Gmsh, PyVista, VTK, ParaView, or JupyterLab
+
+Build and validation notes:
+
+* [CCX 2.23 SPOOLES-MT core image build notes](docs/images/ccx2.23-spoolesmt-core-ubuntu24.04.md)
+
+Pull the image:
+
+```bash
+docker pull ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04
+```
+
+Example with four solver threads:
+
+```bash
+docker run --rm -it \
+  -e OMP_NUM_THREADS=4 \
+  --user "$(id -u):$(id -g)" \
+  -v "$PWD:/work" \
+  -w /work \
+  ale10tech/calculix-core:ccx2.23-spoolesmt-ubuntu24.04 \
+  ccx cantilever
+```
+
+Important: call `ccx` without the `.inp` extension.
 
 ## CalculiX CCX 2.23 Source Build
 
@@ -65,24 +108,25 @@ ccx cantilever.inp
 
 ## Included Tools
 
-The core images include:
+The image contents depend on the tag.
+
+The current recommended solver-core image contains:
 
 * Ubuntu 24.04
-* CalculiX CCX
-* Python 3.12
-* NumPy
-* SciPy
-* Pandas
-* Matplotlib
-* meshio
-* PyVista
-* JupyterLab
-* Gmsh
+* CalculiX CCX 2.23
+* SPOOLES-MT
+* ARPACK
+* BLAS/LAPACK
+* CGX
+
+It intentionally excludes heavier pre/postprocessing and notebook tooling such as Python virtual environments, Gmsh, PyVista, VTK, ParaView, and JupyterLab.
 
 Version-specific notes:
 
+* `ccx2.23-spoolesmt-ubuntu24.04` builds CCX 2.23 from upstream source with source-built SPOOLES-MT and includes CGX.
+* `ccx2.23-ubuntu24.04` builds CCX 2.23 from upstream source and links against Ubuntu system SPOOLES.
 * `ccx2.21-ubuntu24.04` uses Ubuntu package versions of CCX and CGX.
-* `ccx2.23-ubuntu24.04` builds CCX 2.23 from upstream source and currently focuses on the CCX solver.
+* Older early-stage images may still contain Python, Gmsh, PyVista, meshio, and JupyterLab. These tools will move into dedicated `fem-prepost` and `fem-lab` images.
 
 ## Why Ubuntu 24.04?
 
