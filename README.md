@@ -12,6 +12,7 @@ ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/fem-prepost:ubuntu24.04
+ale10tech/freecad:ubuntu24.04
 ale10tech/openradioss-core:ubuntu24.04
 ```
 
@@ -25,6 +26,7 @@ ale10tech/calculix-core:ccx2.23-ubuntu24.04
 ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/fem-prepost:ubuntu24.04
+ale10tech/freecad:ubuntu24.04
 ale10tech/openradioss-core:ubuntu24.04
 ale10tech/calculix-core:0.1.0
 ```
@@ -334,3 +336,59 @@ Example Engine run:
       engine_linux64_gf -i model_0001.rad -nt 1
 
 Known note: `engine_linux64_gf -help` may print help and then exit with code 139. Use `engine_linux64_gf -version` and a real Starter/Engine model run for validation.
+
+## FreeCAD Image
+
+The `freecad:ubuntu24.04` image provides a FreeCAD GUI and CLI environment with:
+
+* FreeCAD 1.1.1 from the official Linux x86_64 AppImage
+* `freecad`
+* `freecadcmd`
+* `freecad-xvfb`
+* `freecadcmd-xvfb`
+* FreeCADCmd scripting support
+* FCStd and STEP export workflows
+* Xvfb support for headless CLI/GUI smoke tests
+
+Build and validation notes:
+
+* [FreeCAD image notes](docs/images/freecad-ubuntu24.04.md)
+
+Pull the image:
+
+    docker pull ale10tech/freecad:ubuntu24.04
+
+Example FreeCADCmd workflow:
+
+    docker run --rm -it \
+      --user "$(id -u):$(id -g)" \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/freecad:ubuntu24.04 \
+      freecadcmd script.py
+
+Example headless/Xvfb workflow:
+
+    docker run --rm -it \
+      --user "$(id -u):$(id -g)" \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/freecad:ubuntu24.04 \
+      freecadcmd-xvfb script.py
+
+Example GUI workflow from a graphical Ubuntu VM terminal:
+
+    xhost +local:root
+
+    docker run --rm -it \
+      -e DISPLAY="$DISPLAY" \
+      -e QT_QPA_PLATFORM=xcb \
+      -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/freecad:ubuntu24.04 \
+      freecad
+
+    xhost -local:root
+
+Known note: direct GUI usage requires a working host display. In a PowerShell to SSH to VM workflow, `DISPLAY` is usually empty and direct GUI usage is not expected to work.
