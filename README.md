@@ -13,6 +13,7 @@ ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/fem-prepost:ubuntu24.04
 ale10tech/freecad:ubuntu24.04
+ale10tech/fem-durability:ubuntu24.04
 ale10tech/openradioss-core:ubuntu24.04
 ```
 
@@ -27,6 +28,7 @@ ale10tech/calculix-core:ccx2.21-ubuntu24.04
 ale10tech/calculix-core:ubuntu24.04
 ale10tech/fem-prepost:ubuntu24.04
 ale10tech/freecad:ubuntu24.04
+ale10tech/fem-durability:ubuntu24.04
 ale10tech/openradioss-core:ubuntu24.04
 ale10tech/calculix-core:0.1.0
 ```
@@ -392,3 +394,49 @@ Example GUI workflow from a graphical Ubuntu VM terminal:
     xhost -local:root
 
 Known note: direct GUI usage requires a working host display. In a PowerShell to SSH to VM workflow, `DISPLAY` is usually empty and direct GUI usage is not expected to work.
+
+## FEM Durability Image
+
+The `fem-durability:ubuntu24.04` image provides a Python-based fatigue and durability analytics environment for FEM-related workflows.
+
+It includes:
+
+* numpy, scipy, pandas and matplotlib
+* meshio, PyVista and VTK
+* rainflow
+* fatpack
+* pyLife
+* py-fatigue
+* FatPy / FABER WG6 related tooling
+* FatigueDS
+* FLife
+
+Build and validation notes:
+
+* [FEM durability image notes](docs/images/fem-durability-ubuntu24.04.md)
+
+Pull the image:
+
+    docker pull ale10tech/fem-durability:ubuntu24.04
+
+Example script workflow:
+
+    docker run --rm \
+      --user "$(id -u):$(id -g)" \
+      -e HOME=/tmp \
+      -e MPLCONFIGDIR=/tmp/mplconfig \
+      -v "$PWD:/work" \
+      -w /work \
+      ale10tech/fem-durability:ubuntu24.04 \
+      python script.py
+
+Typical workflow:
+
+    CalculiX / OpenRadioss
+      -> stress, strain or force time histories
+      -> fem-durability
+      -> rainflow, S-N, Miner damage
+      -> CSV / PNG / optional VTU output
+
+The image was validated with a synthetic stress-time history, rainflow cycle extraction, a simple S-N curve, Miner damage accumulation, CSV export and PNG export.
+
