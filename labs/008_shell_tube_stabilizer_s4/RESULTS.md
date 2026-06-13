@@ -74,3 +74,41 @@ From the FRD-to-VTU postprocessing:
 The attempted RBE2-like coupling using *RIGID BODY and *COUPLING / *KINEMATIC was not compatible with CalculiX shell nodes. CalculiX reported that shell element nodes must not be subject to a RIGID MPC.
 
 The working CalculiX-compatible approach uses DCOUP3D / distributing coupling for both the load introduction rings and the bushing patches.
+
+## Animated result views
+
+### Animated von Mises stress view
+
+The following animation shows the same static stress field with an animated deformation based on the displacement vector `U`.
+
+![Animated S4 shell tube stabilizer von Mises stress](plots/008_shell_tube_stabilizer_s4_svm_warp.gif)
+
+### Simplified fatigue usage animation
+
+The following animation shows a simplified fatigue usage indicator for a scaled amplitude case.
+
+Assumptions for this fatigue indicator:
+
+| Quantity | Value |
+|---|---:|
+| Ultimate tensile strength Rm | 1200 MPa |
+| Reference stress amplitude | 350 MPa |
+| Reference life | 1.0e6 cycles |
+| Basquin slope | 5 |
+| Load ratio | R = -1 |
+| Amplitude scale factor | 2.0 |
+
+Result summary for the scaled amplitude case:
+
+| Quantity | Value |
+|---|---:|
+| max stress amplitude | 396.30 MPa |
+| p99 stress amplitude | 379.13 MPa |
+| max usage at 1e6 cycles | 1.132 |
+| p99 usage at 1e6 cycles | 1.083 |
+| minimum estimated life | 5.37e5 cycles |
+| p01 estimated life | 6.71e5 cycles |
+
+This is a simplified fatigue indicator for workflow demonstration. It is not a validated durability assessment.
+
+![Animated S4 shell tube stabilizer fatigue usage](plots/008_shell_tube_stabilizer_s4_fatigue_usage_amp2_warp.gif)
